@@ -23,7 +23,9 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        userNameTF.autocorrectionType = .no
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+                view.addGestureRecognizer(tap)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -34,14 +36,6 @@ class LoginViewController: UIViewController {
         }
     }
     
-    
-    
-    
-    
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        super .touchesBegan(touches, with: event)
-//    }
-    
     @IBAction func forgotNameAction() {
         showAlert(title: "Forgot User Name?",
                   message: "Your User Name is \(login)")
@@ -51,6 +45,11 @@ class LoginViewController: UIViewController {
     @IBAction func forgotPassAction() {
         showAlert(title: "Forgot User Name?",
                   message: "Your User Name is \(login)")
+    }
+    
+    @IBAction func unwind(for segue: UIStoryboardSegue) {
+    guard segue.source is WelcomeViewController else { return }
+    passwordTF.text = ""
     }
 }
 
